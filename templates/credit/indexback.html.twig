@@ -1,0 +1,56 @@
+{% extends '/backoffice/baseback.html.twig' %}
+
+{% block title %}Credit index{% endblock %}
+
+{% block content %}
+<main>
+    <section class="section-md bg-default decor-text" data-content="Review">
+        <div class="container">
+                <h2 class="heading-decorated">Mes crédits</h2>
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Montant</th>
+                        <th>MontantEmprunte</th>
+                        <th>DateDemande</th>
+                        <th>TauxInteret</th>
+                        <th>NbMois</th>
+                        <th>DateEmission</th>
+                        <th>DateEcheance</th>
+                        <th>Status</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for credit in credits %}
+                        <tr>
+                            <td>{{ credit.id }}</td>
+                            <td>{{ credit.Montant }}</td>
+                            <td>{{ credit.MontantEmprunte }}</td>
+                            <td>{{ credit.DateDemande ? credit.DateDemande|date('Y-m-d') : '' }}</td>
+                            <td>{{ credit.TauxInteret }}</td>
+                            <td>{{ credit.NbMois }}</td>
+                            <td>{{ credit.DateEmission ? credit.DateEmission|date('Y-m-d') : '' }}</td>
+                            <td>{{ credit.DateEcheance ? credit.DateEcheance|date('Y-m-d') : '' }}</td>
+                            <td>{{ credit.Status ? 'Yes' : 'No' }}</td>
+                            <td>{{ credit.Description }}</td>
+                            <td>
+                                <a class="btn btn-block btn-outline-primary" href="{{ path('app_credit_showback', {'id': credit.id}) }}">Show</a>
+                                <a class="btn btn-block btn-outline-primary" href="{{ path('app_remboursement_listback', {'idcredit': credit.id}) }}">Liste </a>
+                                {#  <a href="{{ path('app_credit_edit', {'id': credit.id}) }}">Edit</a> #}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="11">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+</section>
+</main>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends '/frontoffice/basefront.html.twig' %}
+
+{% block title %}Credit index{% endblock %}
+{% block subtitle %}Credit Details{% endblock %}
+
+{% block content %}
+<section class="pt-125 pb-140 bg_white">
+    <div class="container">
+        <div class="row ">
+            <div class="section-title">
+        <h2 class="heading-decorated">Credit Details</h2>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ credit.id }}</td>
+            </tr>
+            <tr>
+                <th>Montant</th>
+                <td>{{ credit.Montant }}</td>
+            </tr>
+            <tr>
+                <th>MontantEmprunte</th>
+                <td>{{ credit.MontantEmprunte }}</td>
+            </tr>
+            <tr>
+                <th>DateDemande</th>
+                <td>{{ credit.DateDemande ? credit.DateDemande|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>TauxInteret</th>
+                <td>{{ credit.TauxInteret }}</td>
+            </tr>
+            <tr>
+                <th>NbMois</th>
+                <td>{{ credit.NbMois }}</td>
+            </tr>
+            <tr>
+                <th>DateEmission</th>
+                <td>{{ credit.DateEmission ? credit.DateEmission|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DateEcheance</th>
+                <td>{{ credit.DateEcheance ? credit.DateEcheance|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ credit.Status ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ credit.Description }}</td>
+            </tr>
+        </tbody>
+    </table>
+                <a class="btn btn-block btn-outline-primary" href="{{ path('app_remboursement_new', {'idcredit': credit.id}) }}">Payer Credit</a>
+                <a style="max-width: 300px;" class="btn btn-block btn-outline-info" href="{{ path('app_credit_index') }}">Back to list</a>
+                {{ include('credit/_delete_form.html.twig') }}
+
+            </div>
+        </div>
+    </div>
+</section>
+
+    {# <a href="{{ path('app_credit_edit', {'id': credit.id}) }}">Edit</a> #}
+
+{% endblock %}
